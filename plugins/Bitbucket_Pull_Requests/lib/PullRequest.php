@@ -41,6 +41,11 @@ class PullRequest
     protected $participants = [];
 
     /**
+     * @var string
+     */
+    protected $reason;
+
+    /**
      * @var \DateTime
      */
     protected $updated;
@@ -253,6 +258,24 @@ class PullRequest
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getReason()
+    {
+        return $this->reason;
+    }
+
+    /**
+     * @param string $reason
+     * @return $this
+     */
+    public function setReason($reason)
+    {
+        $this->reason = $reason;
+        return $this;
+    }
+
     public function toArray()
     {
         return [
@@ -269,6 +292,7 @@ class PullRequest
             'link' => $this->getLink(),
             'created' => $this->getCreated(),
             'updated' => $this->getUpdated(),
+            'reason' => $this->getReason(),
         ];
     }
 
@@ -283,7 +307,8 @@ class PullRequest
             $data['participants'],
             $data['author'],
             $data['created_on'],
-            $data['updated_on']
+            $data['updated_on'],
+            $data['reason']
         )) {
             throw new \InvalidArgumentException('Wrong Pull-request data provided');
         }
@@ -297,7 +322,8 @@ class PullRequest
             ->setParticipants($data['[participants'])
             ->setLink($data['links']['html']['href'])
             ->setCreated($data['created_on'])
-            ->setUpdated($data['updated_on']);
+            ->setUpdated($data['updated_on'])
+            ->setReason($data['reason']);
     }
 
 } 

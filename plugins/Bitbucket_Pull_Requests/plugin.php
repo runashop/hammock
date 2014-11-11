@@ -123,6 +123,10 @@ class Bitbucket_Pull_Requests extends SlackServicePlugin
         return 'Bitpucket Pull-Requests will be posted to: ' . $this->icfg['channel_name'];
     }
 
+    /**
+     * @param string $text
+     * @return array
+     */
     private function sendMessage($text)
     {
         $this->postToChannel($text, array(
@@ -136,42 +140,81 @@ class Bitbucket_Pull_Requests extends SlackServicePlugin
         ];
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     protected function onPullRequestCreated($data)
     {
         $this->smarty->assign('pr', \BPR\PullRequest::fromData($data)->toArray());
         return $this->sendMessage($this->smarty->fetch('pullrequest/created.tpl'));
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     protected function onPullRequestUpdated($data)
     {
+        //Bad bitbucket mapping fix
+        $data['updated_on'] = new DateTime();
+        $data['created_on'] = new DateTime();
+        $data['reviewers'] = $data['participants'] = [];
+        $data['link'] = '';
         $this->smarty->assign('pr', \BPR\PullRequest::fromData($data)->toArray());
         return $this->sendMessage($this->smarty->fetch('pullrequest/updated.tpl'));
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     protected function onPullRequestMerged($data)
     {
         $this->smarty->assign('pr', \BPR\PullRequest::fromData($data)->toArray());
         return $this->sendMessage($this->smarty->fetch('pullrequest/merged.tpl'));
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     protected function onPullRequestApproved($data)
     {
-
+        $this->smarty->assign('user', \BPR\User::fromData($data['user'])->toArray());
+        return $this->sendMessage($this->smarty->fetch('pullrequest/approved.tpl'));
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     protected function onPullRequestUnApproved($data)
     {
-
+        //Bad bitbucket mapping fix
+        $data['user']['links']['avatar']['href'] = '';
+        $this->smarty->assign('user', \BPR\User::fromData($data)->toArray());
+        return $this->sendMessage($this->smarty->fetch('pullrequest/unapproved.tpl'));
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     protected function onPullRequestDeclined($data)
     {
-
+        $this->smarty->assign('pr', \BPR\PullRequest::fromData($data)->toArray());
+        return $this->sendMessage($this->smarty->fetch('pullrequest/declined.tpl'));
     }
 
+    /**
+     * @param array $data
+     * @return array
+     */
     protected function onPullRequestComment($data)
     {
-
+        $this->smarty->assign('comment', \BPR\Comment::fromData($data)->toArray());
+        return $this->sendMessage($this->smarty->fetch('pullrequest/comment.tpl'));
     }
 
 } 

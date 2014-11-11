@@ -1,0 +1,1 @@
+{$user.display_name} unset his approval on pull request
