@@ -1,1 +1,1 @@
-{$user.display_name} unset his approval on pull request
+{$user.display_name} dissaproved pull request

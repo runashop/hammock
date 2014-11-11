@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/lib/User.php';
+require_once __DIR__ . '/lib/Comment.php';
 require_once __DIR__ . '/lib/PullRequest.php';
 
 /**
@@ -160,7 +161,8 @@ class Bitbucket_Pull_Requests extends SlackServicePlugin
         $data['updated_on'] = new DateTime();
         $data['created_on'] = new DateTime();
         $data['reviewers'] = $data['participants'] = [];
-        $data['link'] = '';
+        $data['id'] = '';
+        $data['links']['html']['href'] = '';
         $this->smarty->assign('pr', \BPR\PullRequest::fromData($data)->toArray());
         return $this->sendMessage($this->smarty->fetch('pullrequest/updated.tpl'));
     }
@@ -171,6 +173,12 @@ class Bitbucket_Pull_Requests extends SlackServicePlugin
      */
     protected function onPullRequestMerged($data)
     {
+        //Bad bitbucket mapping fix
+        $data['updated_on'] = new DateTime();
+        $data['created_on'] = new DateTime();
+        $data['reviewers'] = $data['participants'] = [];
+        $data['id'] = '';
+        $data['links']['html']['href'] = '';
         $this->smarty->assign('pr', \BPR\PullRequest::fromData($data)->toArray());
         return $this->sendMessage($this->smarty->fetch('pullrequest/merged.tpl'));
     }
@@ -193,7 +201,7 @@ class Bitbucket_Pull_Requests extends SlackServicePlugin
     {
         //Bad bitbucket mapping fix
         $data['user']['links']['avatar']['href'] = '';
-        $this->smarty->assign('user', \BPR\User::fromData($data)->toArray());
+        $this->smarty->assign('user', \BPR\User::fromData($data['user'])->toArray());
         return $this->sendMessage($this->smarty->fetch('pullrequest/unapproved.tpl'));
     }
 
@@ -203,6 +211,12 @@ class Bitbucket_Pull_Requests extends SlackServicePlugin
      */
     protected function onPullRequestDeclined($data)
     {
+        //Bad bitbucket mapping fix
+        $data['updated_on'] = new DateTime();
+        $data['created_on'] = new DateTime();
+        $data['reviewers'] = $data['participants'] = [];
+        $data['id'] = '';
+        $data['links']['html']['href'] = '';
         $this->smarty->assign('pr', \BPR\PullRequest::fromData($data)->toArray());
         return $this->sendMessage($this->smarty->fetch('pullrequest/declined.tpl'));
     }

@@ -1,1 +1,1 @@
-Pull request <{$pr.link}|{$pr.title}> declined because of {$pr.reason}
+Pull request *{$pr.title}* declined because of {$pr.reason}

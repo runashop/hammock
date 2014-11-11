@@ -187,7 +187,7 @@ class Comment
         return (new self())
             ->setId($data['id'])
             ->setText($data['content']['raw'])
-            ->setAuthor($data['author'])
+            ->setAuthor($data['user'])
             ->setLink($data['links']['html']['href'])
             ->setCreated($data['created_on'])
             ->setUpdated($data['updated_on']);

@@ -1,1 +1,1 @@
-Pull request <{$pr.link}|{$pr.title}> was merged
+Pull request *{$pr.title}* was merged
