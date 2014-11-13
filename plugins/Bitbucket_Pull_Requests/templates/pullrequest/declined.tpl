@@ -1,0 +1,1 @@
+Pull request *{$pr.title}* declined because of {$pr.reason}

@@ -1,0 +1,1 @@
+Pull request *{$pr.title}* was merged
