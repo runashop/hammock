@@ -156,6 +156,11 @@
 			return api_channels_list();
 		}
 
+        function getUsersList() {
+
+            return api_users_list();
+        }
+
 		function onLiveHook($req){
 
 			if ($this->cfg['has_token']){

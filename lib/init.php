@@ -143,6 +143,20 @@
 		return $channels;
 	}
 
+	function api_users_list(){
+
+		$ret = api_call('users.list');
+		$users = array();
+		foreach ($ret['data']['members'] as $row){
+			if (!$row['deleted']) $users[$row['id']] = [
+                'name' => $row['name'],
+                'full_name' => isset($row['profile']['real_name']) ? $row['profile']['real_name'] : '',
+            ];
+		}
+
+		return $users;
+	}
+
 
 	function verify_auth(){
 

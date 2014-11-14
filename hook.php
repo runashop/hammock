@@ -34,6 +34,7 @@
 	# or 'multipart/form-data', capture the entire post body as a string
 	#
 
+unset($_POST); //debug only
 	if (!count($_POST)){
 
 		$body = file_get_contents("php://input");
