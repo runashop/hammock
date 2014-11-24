@@ -11,7 +11,7 @@ class Ppurl extends AbstractCommand implements CommandInterface
      */
     public function run($command)
     {
-        $command = trim($command);
+        $command = html_entity_decode(trim($command));
         if ($command[0] === '/') {
             $command = 'http://domain.com' . $command;
         }
