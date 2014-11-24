@@ -46,7 +46,7 @@ try {
         }
     }
 } catch (CommandException $e) {
-    die($e->getCommand()->getName() . ' Command failed with message: ' . $e->getMessage());
+    error_log($e->getCommand()->getName() . ' Command failed with message: ' . $e->getMessage(), 3, 'error.log');
 } catch (Exception $e) {
-    die('Unknown error: ' . $e->getMessage());
+    error_log('Unknown error: ' . $e->getMessage(), 3, 'error.log');
 }
