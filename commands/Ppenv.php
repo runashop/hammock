@@ -40,6 +40,7 @@ EOT;
             'eupp2' => 'EU PP2',
             'eupp2t' => 'EU PP2 Test',
             'euppt' => 'EU PP1 Test',
+            'eupp2t2' => 'EU PP2 Test 2 (rc test)',
         );
 
         $originalHosts = $hosts;
@@ -58,4 +59,4 @@ EOT;
         $this->_message->respond($response);
     }
 
-} 
+}
