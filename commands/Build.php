@@ -1,6 +1,7 @@
 <?php
 
 namespace Slack\Command;
+use ThreadMeUp\Slack\User;
 
 /**
  * Class Build
@@ -17,10 +18,21 @@ class Build extends AbstractCommand implements CommandInterface
         if (!$branch) {
             $branch = 'dev';
         }
+
+        $userId = $this->_message->userId();
+        $author = 'Victor Gryshko <vgryshko@brightgrove.com>';
+        /** @var User[] $users */
+        $users = $this->_client->users();
+        foreach ($users as $user) {
+            if ($user->id() == $userId) {
+                $author = sprintf('%s <%s>', $user->name(), $user->email());
+            }
+        }
+
         $bitbucketPayload = json_encode([
             'commits' => [
                 [
-                    'raw_author' => 'Victor Gryshko <vgryshko@brightgrove.com>',
+                    'raw_author' => $author,
                     'raw_node' => $commit,
                     'branch' => $branch,
                     'message' => 'Manual build'
