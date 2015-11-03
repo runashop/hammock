@@ -42,8 +42,10 @@ class Build extends AbstractCommand implements CommandInterface
 
             if (isset($result['commits'])) {
                 foreach ($result['commits'] as $commit => $build) {
-                    if (isset($build['buildId'])) {
-                        $this->_message->respond(sprintf('Build <http://phpci.runashop.net/build/view/%d|#%1$d>', $build['buildId']));
+                    if (isset($build['buildID'])) {
+                        $this->_message->respond(sprintf('Build <http://phpci.runashop.net/build/view/%d|#%1$d> created', $build['buildID']));
+                    } elseif (isset($build['message'])) {
+                        $this->_message->respond(sprintf('Build %s: %s', $build['status'], $build['message']));
                     }
                 }
             }
