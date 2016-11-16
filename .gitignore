@@ -2,4 +2,3 @@ lib/config.php
 data/*
 .idea/
 vendor/
-composer.lock
