@@ -1,1 +1,0 @@
-{$user.display_name} dissaproved pull request

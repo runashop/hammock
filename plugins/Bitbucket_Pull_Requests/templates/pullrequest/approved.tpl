@@ -1,1 +1,0 @@
-{$user.display_name} approved pull request

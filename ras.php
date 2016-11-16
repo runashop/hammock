@@ -1,10 +1,8 @@
 <?php
 
-require_once "vendor/autoload.php";
+require_once __DIR__ . '/vendor/autoload.php';
 
-use ThreadMeUp\Slack\Client as Slack;
-use Slack\Command\CommandException;
-use Slack\Command\CommandInterface;
+use PhpSlackBot\Bot;
 
 $config = [
     'token' => 'xoxp-2760649163-2762475502-2955876209-14c3a7',
@@ -14,39 +12,7 @@ $config = [
     'parse' => '',
 ];
 
-try {
-    $slack = new Slack($config);
-
-    $incoming = $slack->listen();
-
-    if ($incoming) {
-        $text = trim($incoming->text());
-        $tokens = preg_split('/\s+/', $text);
-        if (count($tokens) > 0) {
-            $commandText = array_shift($tokens);
-            $commandClass = '\\Slack\\Command\\' . ucfirst($commandText);
-            if (!class_exists($commandClass)) {
-                throw new RuntimeException('No such command: ' . $commandText);
-            }
-            $commandText = join(' ', $tokens);
-            /** @var CommandInterface $command */
-            $command = new $commandClass($slack, $incoming);
-            if (!$command instanceof CommandInterface) {
-                throw new RuntimeException('No such command: ' . get_class($command));
-            }
-            if (strtolower($commandText) === 'help') {
-                $incoming->respond($command->getDescription());
-            }
-            else {
-                $command->run($commandText);
-            }
-        }
-        else {
-            $incoming->respond('Hello! :)');
-        }
-    }
-} catch (CommandException $e) {
-    error_log($e->getCommand()->getName() . ' Command failed with message: ' . $e->getMessage(), 3, 'error.log');
-} catch (Exception $e) {
-    error_log('Unknown error: ' . $e->getMessage(), 3, 'error.log');
-}
+$bot = new Bot();
+$bot->setToken('rfE2xIVrYWsvbZmPTOB911yg'); // Get your token here https://my.slack.com/services/new/bot
+$bot->loadCommand(new \Slack\Command\Build());
+$bot->run();

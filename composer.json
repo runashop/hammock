@@ -10,8 +10,7 @@
         }
     ],
     "require": {
-        "threadmeup/slack-sdk": "1.1.3",
-        "aws/aws-sdk-php": "~2.8"
+        "jclg/php-slack-bot": "dev-master"
     },
     "autoload": {
         "psr-4": {

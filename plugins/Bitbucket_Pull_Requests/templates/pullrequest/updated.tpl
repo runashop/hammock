@@ -1,1 +1,0 @@
-{$pr.author.display_name} updated his pull request: *{$pr.title}*

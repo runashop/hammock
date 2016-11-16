@@ -1,1 +1,0 @@
-{$comment.author.display_name}: {$comment.text} <{$comment.link}|#>
