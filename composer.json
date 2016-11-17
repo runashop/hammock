@@ -10,11 +10,12 @@
         }
     ],
     "require": {
-        "jclg/php-slack-bot": "dev-master"
+        "jclg/php-slack-bot": "dev-master",
+        "react/http": "dev-master#cd15204bd15d106d7832c680e4fb0ca0ce2f5e30"
     },
     "autoload": {
-        "psr-4": {
-            "Slack\\Command\\": "commands/"
+        "psr-0": {
+            "Slack\\": "src/"
         }
     }
 }

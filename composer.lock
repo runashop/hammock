@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0025a76a81e923ab9b7301b52b40d0e1",
-    "content-hash": "ec1481ff31593cee2ad322cbd046c553",
+    "hash": "97180e63f021ea0e9baf26a4a69b2cdc",
+    "content-hash": "e56aec6f24746677f4dccf2470ff284e",
     "packages": [
         {
             "name": "devristo/phpws",
@@ -361,12 +361,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/http.git",
-                "reference": "abedac54967d7ea237ad104cff8274e2c4077cf4"
+                "reference": "cd15204bd15d106d7832c680e4fb0ca0ce2f5e30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/http/zipball/abedac54967d7ea237ad104cff8274e2c4077cf4",
-                "reference": "abedac54967d7ea237ad104cff8274e2c4077cf4",
+                "url": "https://api.github.com/repos/reactphp/http/zipball/cd15204bd15d106d7832c680e4fb0ca0ce2f5e30",
+                "reference": "cd15204bd15d106d7832c680e4fb0ca0ce2f5e30",
                 "shasum": ""
             },
             "require": {
@@ -390,7 +390,7 @@
             "keywords": [
                 "http"
             ],
-            "time": "2016-11-09 15:20:39"
+            "time": "2016-07-06 23:51:32"
         },
         {
             "name": "react/promise",
@@ -988,7 +988,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "jclg/php-slack-bot": 20
+        "jclg/php-slack-bot": 20,
+        "react/http": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
